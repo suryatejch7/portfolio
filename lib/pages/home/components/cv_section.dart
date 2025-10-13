@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:web_portfolio/models/design_process.dart';
@@ -48,10 +47,11 @@ class CvSection extends StatelessWidget {
 
   Widget _buildUi(BuildContext context, double width) {
     // we need the context to get maxWidth before the constraints below
-    return ResponsiveWrapper(
-      maxWidth: width,
-      minWidth: width,
-      defaultScale: false,
+    return Container(
+      constraints: BoxConstraints(
+        maxWidth: width,
+        minWidth: width,
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [

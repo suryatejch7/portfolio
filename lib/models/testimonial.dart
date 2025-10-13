@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 class Testimonial {
   final String text;
@@ -7,9 +6,9 @@ class Testimonial {
   final String profilePhoto;
 
   Testimonial({
-    @required this.text,
-    @required this.occupation,
-    @required this.personName,
-    @required this.profilePhoto,
+    required this.text,
+    required this.occupation,
+    required this.personName,
+    required this.profilePhoto,
   });
 }

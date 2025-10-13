@@ -1,12 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 import 'package:web_portfolio/pages/home/components/carousel_items.dart';
 import 'package:web_portfolio/utils/constants.dart';
 import 'package:web_portfolio/utils/screen_helper.dart';
 
 class Carousel extends StatelessWidget {
-  final CarouselController carouselController = CarouselController();
   @override
   Widget build(BuildContext context) {
     double carouselContainerHeight = MediaQuery.of(context).size.height *
@@ -20,7 +18,6 @@ class Carousel extends StatelessWidget {
           Container(
             alignment: Alignment.center,
             child: CarouselSlider(
-              carouselController: carouselController,
               options: CarouselOptions(
                 // autoPlay: true,
                 viewportFraction: 1,
@@ -68,10 +65,11 @@ class Carousel extends StatelessWidget {
 // Big screens
 Widget _buildDesktop(BuildContext context, Widget text, Widget image) {
   return Center(
-    child: ResponsiveWrapper(
-      maxWidth: kDesktopMaxWidth,
-      minWidth: kDesktopMaxWidth,
-      defaultScale: false,
+    child: Container(
+      constraints: BoxConstraints(
+        maxWidth: kDesktopMaxWidth,
+        minWidth: kDesktopMaxWidth,
+      ),
       child: Row(
         children: [
           Expanded(
@@ -89,10 +87,11 @@ Widget _buildDesktop(BuildContext context, Widget text, Widget image) {
 // Mid screens
 Widget _buildTablet(BuildContext context, Widget text, Widget image) {
   return Center(
-    child: ResponsiveWrapper(
-      maxWidth: kTabletMaxWidth,
-      minWidth: kTabletMaxWidth,
-      defaultScale: false,
+    child: Container(
+      constraints: BoxConstraints(
+        maxWidth: kTabletMaxWidth,
+        minWidth: kTabletMaxWidth,
+      ),
       child: Row(
         children: [
           Expanded(
