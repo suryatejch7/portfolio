@@ -3,6 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:web_portfolio/models/carousel_item_model.dart';
 import 'package:web_portfolio/utils/constants.dart';
 
+// Global callback function for download
+VoidCallback? onDownloadPressed;
+
 List<CarouselItemModel> carouselItems = List.generate(
   5,
   (index) => CarouselItemModel(
@@ -61,7 +64,7 @@ List<CarouselItemModel> carouselItems = List.generate(
                 horizontal: 28.0,
               ),
               child: TextButton(
-                onPressed: () {},
+                onPressed: onDownloadPressed,
                 child: Text(
                   "DOWNLOAD CV",
                   style: TextStyle(

@@ -3,31 +3,32 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:web_portfolio/models/footer_item.dart';
 import 'package:web_portfolio/utils/constants.dart';
 import 'package:web_portfolio/utils/screen_helper.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 final List<FooterItem> footerItems = [
   FooterItem(
     iconPath: "assets/mappin.png",
     title: "ADDRESS",
-    text1: "999 Carter Street",
-    text2: "Sailor Springs, IL 64234",
+    text1: "Mahindra University,",
+    text2: "Hyderabad",
   ),
   FooterItem(
     iconPath: "assets/phone.png",
     title: "PHONE",
-    text1: "+1 618-689-9604",
-    text2: "+1 781-689-9632",
+    text1: "+91 7702282663",
+    text2: "",
   ),
   FooterItem(
     iconPath: "assets/email.png",
     title: "EMAIL",
-    text1: "hello@example.com",
-    text2: "info@flutterpanda.com",
+    text1: "suryatejch7@gmail.com",
+    text2: "",
   ),
   FooterItem(
     iconPath: "assets/whatsapp.png",
     title: "WHATSAPP",
-    text1: "+234 901-134-0095",
-    text2: "+234 901-134-0095",
+    text1: "+91 7702282663",
+    text2: "",
   )
 ];
 
@@ -63,59 +64,65 @@ Widget _buildUi(double width, BuildContext context) {
                   runSpacing: 20.0,
                   children: footerItems
                       .map(
-                        (footerItem) => Container(
-                          height: 120.0,
-                          width: ScreenHelper.isMobile(context)
-                              ? constraints.maxWidth / 2.0 - 20.0
-                              : constraints.maxWidth / 4.0 - 20.0,
-                          child: Container(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
+                        (footerItem) => GestureDetector(
+                          onTap: () => _handleContactTap(footerItem, context),
+                          child: MouseRegion(
+                            cursor: SystemMouseCursors.click,
+                            child: Container(
+                              height: 120.0,
+                              width: ScreenHelper.isMobile(context)
+                                  ? constraints.maxWidth / 2.0 - 20.0
+                                  : constraints.maxWidth / 4.0 - 20.0,
+                              child: Container(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Image.asset(
-                                      footerItem.iconPath,
-                                      width: 25.0,
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        Image.asset(
+                                          footerItem.iconPath,
+                                          width: 25.0,
+                                        ),
+                                        SizedBox(
+                                          width: 15.0,
+                                        ),
+                                        Text(
+                                          footerItem.title,
+                                          style: GoogleFonts.oswald(
+                                            fontSize: 18.0,
+                                            fontWeight: FontWeight.w700,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                     SizedBox(
-                                      width: 15.0,
+                                      height: 15.0,
                                     ),
-                                    Text(
-                                      footerItem.title,
-                                      style: GoogleFonts.oswald(
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.w700,
-                                        color: Colors.white,
+                                    RichText(
+                                      textAlign: TextAlign.start,
+                                      text: TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text: "${footerItem.text1}\n",
+                                            style: TextStyle(
+                                              color: kCaptionColor,
+                                              height: 1.8,
+                                            ),
+                                          ),
+                                          TextSpan(
+                                            text: "${footerItem.text2}\n",
+                                            style: TextStyle(
+                                              color: kCaptionColor,
+                                            ),
+                                          )
+                                        ],
                                       ),
-                                    ),
+                                    )
                                   ],
                                 ),
-                                SizedBox(
-                                  height: 15.0,
-                                ),
-                                RichText(
-                                  textAlign: TextAlign.start,
-                                  text: TextSpan(
-                                    children: [
-                                      TextSpan(
-                                        text: "${footerItem.text1}\n",
-                                        style: TextStyle(
-                                          color: kCaptionColor,
-                                          height: 1.8,
-                                        ),
-                                      ),
-                                      TextSpan(
-                                        text: "${footerItem.text2}\n",
-                                        style: TextStyle(
-                                          color: kCaptionColor,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                )
-                              ],
+                              ),
                             ),
                           ),
                         ),
@@ -123,70 +130,58 @@ Widget _buildUi(double width, BuildContext context) {
                       .toList(),
                 ),
               ),
-              SizedBox(
-                height: 20.0,
-              ),
-              Flex(
-                direction: ScreenHelper.isMobile(context)
-                    ? Axis.vertical
-                    : Axis.horizontal,
-                mainAxisAlignment: ScreenHelper.isMobile(context)
-                    ? MainAxisAlignment.center
-                    : MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 8.0),
-                    child: Text(
-                      "Copyright (c) 2021 Michele Harrington. All rights Reserved",
-                      style: TextStyle(
-                        color: kCaptionColor,
-                      ),
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      GestureDetector(
-                        onTap: () {},
-                        child: MouseRegion(
-                          cursor: SystemMouseCursors.click,
-                          child: Text(
-                            "Privacy Policy",
-                            style: TextStyle(
-                              color: kCaptionColor,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Text(
-                          "|",
-                          style: TextStyle(
-                            color: kCaptionColor,
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {},
-                        child: MouseRegion(
-                          cursor: SystemMouseCursors.click,
-                          child: Text(
-                            "Terms & Conditions",
-                            style: TextStyle(
-                              color: kCaptionColor,
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  )
-                ],
-              )
             ],
           );
         },
       ),
     ),
   );
+}
+
+// Function to handle contact taps
+void _handleContactTap(FooterItem footerItem, BuildContext context) async {
+  String? url;
+  
+  switch (footerItem.title) {
+    case "ADDRESS":
+      // Open Google Maps with the address
+      url = "https://www.google.com/maps/search/?api=1&query=${Uri.encodeComponent("Mahindra University, Hyderabad")}";
+      break;
+    case "PHONE":
+      // Open phone dialer
+      url = "tel:+917702282663";
+      break;
+    case "EMAIL":
+      // Open email client
+      url = "mailto:suryatejch7@gmail.com";
+      break;
+    case "WHATSAPP":
+      // Open WhatsApp
+      url = "https://wa.me/917702282663";
+      break;
+  }
+  
+  if (url != null) {
+    try {
+      if (await canLaunchUrl(Uri.parse(url))) {
+        await launchUrl(Uri.parse(url));
+      } else {
+        // Fallback: show a snackbar with the contact info
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Could not open ${footerItem.title.toLowerCase()}. Contact: ${footerItem.text1}'),
+            duration: Duration(seconds: 3),
+          ),
+        );
+      }
+    } catch (e) {
+      // Show error message
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error opening ${footerItem.title.toLowerCase()}: $e'),
+          duration: Duration(seconds: 3),
+        ),
+      );
+    }
+  }
 }

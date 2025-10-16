@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:web_portfolio/pages/home/components/carousel_items.dart';
 import 'package:web_portfolio/utils/constants.dart';
 import 'package:web_portfolio/utils/screen_helper.dart';
+import 'package:web_portfolio/utils/download_utils.dart';
 
 class Carousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // Set up the download callback
+    onDownloadPressed = () => downloadResume(context);
     double carouselContainerHeight = MediaQuery.of(context).size.height *
         (ScreenHelper.isMobile(context) ? .7 : .85);
     return Container(
