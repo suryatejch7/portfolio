@@ -4,12 +4,7 @@ import 'package:web_portfolio/models/stat.dart';
 import 'package:web_portfolio/utils/constants.dart';
 import 'package:web_portfolio/utils/screen_helper.dart';
 
-final List<Stat> stats = [
-  Stat(count: "43", text: "Clients"),
-  Stat(count: "68+", text: "Projects"),
-  Stat(count: "17", text: "Awards"),
-  Stat(count: "10", text: "Years\nExperience"),
-];
+// Removed stats - replaced with GitHub button
 
 class PortfolioStats extends StatelessWidget {
   @override
@@ -25,51 +20,52 @@ class PortfolioStats extends StatelessWidget {
   }
 
   Widget _buildUi(double width, BuildContext context) {
-    return Container(
+    return Center(
       child: Container(
         constraints: BoxConstraints(
           maxWidth: width,
           minWidth: width,
         ),
-        child: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraint) {
-            return Wrap(
-              spacing: 20.0,
-              runSpacing: 20.0,
-              children: stats.map((stat) {
-                return Container(
-                  padding: EdgeInsets.symmetric(vertical: 15.0),
-                  // Just use the helper here really
-                  width: ScreenHelper.isMobile(context)
-                      ? constraint.maxWidth / 2.0 - 20
-                      : (constraint.maxWidth / 4.0 - 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        stat.count,
-                        style: GoogleFonts.oswald(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 32.0,
-                          color: Colors.white,
-                        ),
+        child: Center(
+          child: MouseRegion(
+            cursor: SystemMouseCursors.click,
+            child: GestureDetector(
+              onTap: () {
+                // Open GitHub repositories page
+                // Note: In a real app, you'd use url_launcher package
+                print("Opening GitHub: https://github.com/suryatejch7?tab=repositories");
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  color: kPrimaryColor,
+                  borderRadius: BorderRadius.circular(6.0),
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 10.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "VIEW ALL",
+                      style: GoogleFonts.oswald(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16.0,
                       ),
-                      SizedBox(
-                        width: 10.0,
+                    ),
+                    SizedBox(height: 2.0),
+                    Text(
+                      "(GitHub)",
+                      style: GoogleFonts.oswald(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w300,
+                        fontSize: 10.0,
                       ),
-                      Text(
-                        stat.text,
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          color: kCaptionColor,
-                        ),
-                      )
-                    ],
-                  ),
-                );
-              }).toList(),
-            );
-          },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
         ),
       ),
     );

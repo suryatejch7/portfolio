@@ -45,7 +45,7 @@ class WebsiteAd extends StatelessWidget {
                         height: 15.0,
                       ),
                       Text(
-                        "EVOLVING NAGA\nRESORT WEBSITE",
+                        "ONLINE AUCTION WEBSITE",
                         style: GoogleFonts.oswald(
                           color: Colors.white,
                           fontWeight: FontWeight.w900,
@@ -64,71 +64,6 @@ class WebsiteAd extends StatelessWidget {
                           fontSize: 15.0,
                         ),
                       ),
-                      SizedBox(
-                        height: 25.0,
-                      ),
-                      Row(
-                        children: [
-                          MouseRegion(
-                            cursor: SystemMouseCursors.click,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: kPrimaryColor,
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              height: 48.0,
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 28.0,
-                              ),
-                              child: TextButton(
-                                onPressed: () {},
-                                child: Center(
-                                  child: Text(
-                                    "EXPLORE MORE",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 13.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10.0,
-                          ),
-                          MouseRegion(
-                            cursor: SystemMouseCursors.click,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8.0),
-                                border: Border.all(
-                                  color: kPrimaryColor,
-                                ),
-                              ),
-                              height: 48.0,
-                              padding: EdgeInsets.symmetric(horizontal: 28.0),
-                              child: TextButton(
-                                onPressed: () {},
-                                child: Center(
-                                  child: Text(
-                                    "NEXT APP",
-                                    style: TextStyle(
-                                      color: kPrimaryColor,
-                                      fontSize: 13.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 70.0,
-                      )
                     ],
                   ),
                 ),
@@ -137,10 +72,17 @@ class WebsiteAd extends StatelessWidget {
                 ),
                 Expanded(
                   flex: constraints.maxWidth > 720.0 ? 1 : 0,
-                  child: Image.asset(
-                    "assets/laptop.png",
-                    // Set width for image on smaller screen
-                    width: constraints.maxWidth > 720.0 ? null : 350.0,
+                  child: Container(
+                    constraints: BoxConstraints(
+                      maxWidth: constraints.maxWidth > 720.0 ? 400.0 : 300.0,
+                      maxHeight: constraints.maxWidth > 720.0 ? 500.0 : 400.0,
+                    ),
+                    child: Image.asset(
+                      "assets/web_guess1.png",
+                      fit: BoxFit.contain,
+                      width: constraints.maxWidth > 720.0 ? 400.0 : 300.0,
+                      height: constraints.maxWidth > 720.0 ? 500.0 : 400.0,
+                    ),
                   ),
                 ),
               ],

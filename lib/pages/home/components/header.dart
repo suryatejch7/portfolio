@@ -11,11 +11,8 @@ List<HeaderItem> headerItems = [
     title: "HOME",
     onTap: () {},
   ),
-  HeaderItem(title: "MY INTRO", onTap: () {}),
-  HeaderItem(title: "SERVICES", onTap: () {}),
-  HeaderItem(title: "PORTFOLIO", onTap: () {}),
-  HeaderItem(title: "TESTIMONIALS", onTap: () {}),
-  HeaderItem(title: "BLOGS", onTap: () {}),
+  HeaderItem(title: "PROJECTS", onTap: () {}),
+  HeaderItem(title: "SKILLS", onTap: () {}),
   HeaderItem(
     title: "HIRE ME",
     onTap: () {},

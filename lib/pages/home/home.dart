@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:web_portfolio/pages/home/components/carousel.dart';
 import 'package:web_portfolio/pages/home/components/cv_section.dart';
 import 'package:web_portfolio/pages/home/components/education_section.dart';
@@ -81,7 +80,6 @@ class Home extends StatelessWidget {
               SizedBox(
                 height: 20.0,
               ),
-              CvSection(),
               IosAppAd(),
               SizedBox(
                 height: 70.0,
@@ -99,10 +97,6 @@ class Home extends StatelessWidget {
                 height: 50.0,
               ),
               SkillSection(),
-              SizedBox(
-                height: 50.0,
-              ),
-              Sponsors(),
               SizedBox(
                 height: 50.0,
               ),

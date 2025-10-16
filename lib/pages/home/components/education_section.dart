@@ -7,27 +7,21 @@ import 'package:web_portfolio/utils/screen_helper.dart';
 final List<Education> educationList = [
   Education(
     description:
-        "This is a sample education and details about it is stated below. This is a sample education and details about it is stated below",
-    linkName: "www.flutterpanda.com",
-    period: "2019 - PRESENT",
+        "Secondary School Education • Percentage: 85% • Foundation in core subjects",
+    linkName: "Narayana School",
+    period: "Apr 2019 - Mar 2020",
   ),
   Education(
     description:
-        "This is a sample education and details about it is stated below.This is a sample education and details about it is stated below",
-    linkName: "www.flutterpanda.com",
-    period: "2018 - 2019",
+        "Intermediate Education • Percentage: 97% • Focused on Science and Mathematics",
+    linkName: "Narayana College",
+    period: "May 2020 - Apr 2022",
   ),
   Education(
     description:
-        "This is a sample education and details about it is stated below. This is a sample education and details about it is stated below",
-    linkName: "www.flutterpanda.com",
-    period: "2017 - 2018",
-  ),
-  Education(
-    description:
-        "This is a sample education and details about it is stated below. This is a sample education and details about it is stated below",
-    linkName: "www.flutterpanda.com",
-    period: "2016 - 2017",
+        "Bachelor of Computer Science Engineering • CGPA: 6.0/10 (till 6th semester) • Coursework: Software Engineering, Object-Oriented Programming, DBMS",
+    linkName: "Mahindra University",
+    period: "Aug 2022 - Present",
   ),
 ];
 
@@ -52,7 +46,7 @@ class EducationSection extends StatelessWidget {
           minWidth: width,
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               "EDUCATION",
@@ -66,83 +60,54 @@ class EducationSection extends StatelessWidget {
             SizedBox(
               height: 5.0,
             ),
-            Wrap(
-              children: [
-                Container(
-                  constraints: BoxConstraints(maxWidth: 400.0),
-                  child: Text(
-                    "A full stack all round developer that does all the job he needs to do at all times. Actually this is a false statement",
-                    style: TextStyle(
-                      color: Colors.white,
-                      height: 1.5,
-                    ),
-                  ),
-                ),
-              ],
-            ),
             SizedBox(
               height: 40.0,
             ),
-            LayoutBuilder(
-              builder: (context, constraints) {
-                return Container(
-                  child: Wrap(
-                    spacing: 20.0,
-                    runSpacing: 20.0,
-                    children: educationList
-                        .map(
-                          (education) => Container(
-                            width: constraints.maxWidth / 2.0 - 20.0,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  education.period,
-                                  style: GoogleFonts.oswald(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 20.0,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5.0,
-                                ),
-                                Text(
-                                  education.description,
-                                  maxLines: 4,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    color: kCaptionColor,
-                                    height: 1.5,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 20.0,
-                                ),
-                                MouseRegion(
-                                  cursor: SystemMouseCursors.click,
-                                  child: GestureDetector(
-                                    onTap: () {},
-                                    child: Text(
-                                      education.linkName,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 40.0,
-                                )
-                              ],
+            ...educationList
+                .map(
+                  (education) => Container(
+                    margin: EdgeInsets.only(bottom: 30.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          education.period,
+                          style: GoogleFonts.oswald(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 20.0,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 5.0,
+                        ),
+                        Text(
+                          education.description,
+                          style: TextStyle(
+                            color: kCaptionColor,
+                            height: 1.5,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                        MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: GestureDetector(
+                            onTap: () {},
+                            child: Text(
+                              education.linkName,
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
                             ),
                           ),
-                        )
-                        .toList(),
+                        ),
+                      ],
+                    ),
                   ),
-                );
-              },
-            )
+                )
+                .toList(),
           ],
         ),
       ),

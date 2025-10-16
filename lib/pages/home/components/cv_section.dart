@@ -55,36 +55,8 @@ class CvSection extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "BETTER DESIGN,\nBETTER EXPERIENCES",
-                style: GoogleFonts.oswald(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w900,
-                  height: 1.8,
-                  fontSize: 18.0,
-                ),
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: MouseRegion(
-                  cursor: SystemMouseCursors.click,
-                  child: Text(
-                    "DOWNLOAD CV",
-                    style: GoogleFonts.oswald(
-                      color: kPrimaryColor,
-                      fontWeight: FontWeight.w900,
-                      fontSize: 16.0,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
           SizedBox(
-            height: 50.0,
+            height: 100.0,
           ),
           Container(
             child: LayoutBuilder(

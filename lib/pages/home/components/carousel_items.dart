@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:web_portfolio/models/carousel_item_model.dart';
 import 'package:web_portfolio/utils/constants.dart';
@@ -14,7 +13,7 @@ List<CarouselItemModel> carouselItems = List.generate(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            "PRODUCT DESIGNER",
+            "JAVA BACKEND & FLUTTER DEVELOPER",
             style: GoogleFonts.oswald(
               color: kPrimaryColor,
               fontWeight: FontWeight.w900,
@@ -25,7 +24,7 @@ List<CarouselItemModel> carouselItems = List.generate(
             height: 18.0,
           ),
           Text(
-            "MICHELE\nHARRINGTON",
+            "SURYA\nTEJ",
             style: GoogleFonts.oswald(
               color: Colors.white,
               fontSize: 40.0,
@@ -37,7 +36,7 @@ List<CarouselItemModel> carouselItems = List.generate(
             height: 10.0,
           ),
           Text(
-            "Full-stack developer, based in Barcelona",
+            "Java backend developer & Flutter mobile/web developer",
             style: TextStyle(
               color: kCaptionColor,
               fontSize: 15.0,
@@ -46,34 +45,6 @@ List<CarouselItemModel> carouselItems = List.generate(
           ),
           SizedBox(
             height: 10.0,
-          ),
-          Container(
-            child: Wrap(
-              children: [
-                Text(
-                  "Need a full custom website?",
-                  style: TextStyle(
-                    color: kCaptionColor,
-                    fontSize: 15.0,
-                    height: 1.5,
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {},
-                  child: MouseRegion(
-                    cursor: SystemMouseCursors.click,
-                    child: Text(
-                      " Got a project? Let's talk.",
-                      style: TextStyle(
-                        height: 1.5,
-                        color: Colors.white,
-                        fontSize: 15.0,
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            ),
           ),
           SizedBox(
             height: 25.0,
@@ -92,7 +63,7 @@ List<CarouselItemModel> carouselItems = List.generate(
               child: TextButton(
                 onPressed: () {},
                 child: Text(
-                  "GET STARTED",
+                  "DOWNLOAD CV",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 13.0,
