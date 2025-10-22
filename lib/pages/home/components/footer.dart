@@ -7,32 +7,34 @@ import 'package:url_launcher/url_launcher.dart';
 
 final List<FooterItem> footerItems = [
   FooterItem(
-    iconPath: "assets/mappin.png",
-    title: "ADDRESS",
-    text1: "Mahindra University,",
-    text2: "Hyderabad",
+    iconPath: 'assets/mappin.png',
+    title: 'ADDRESS',
+    text1: 'Mahindra University,',
+    text2: 'Hyderabad',
   ),
   FooterItem(
-    iconPath: "assets/phone.png",
-    title: "PHONE",
-    text1: "+91 7702282663",
-    text2: "",
+    iconPath: 'assets/phone.png',
+    title: 'PHONE',
+    text1: '+91 7702282663',
+    text2: '',
   ),
   FooterItem(
-    iconPath: "assets/email.png",
-    title: "EMAIL",
-    text1: "suryatejch7@gmail.com",
-    text2: "",
+    iconPath: 'assets/email.png',
+    title: 'EMAIL',
+    text1: 'suryatejch7@gmail.com',
+    text2: '',
   ),
   FooterItem(
-    iconPath: "assets/whatsapp.png",
-    title: "WHATSAPP",
-    text1: "+91 7702282663",
-    text2: "",
+    iconPath: 'assets/whatsapp.png',
+    title: 'WHATSAPP',
+    text1: '+91 7702282663',
+    text2: '',
   )
 ];
 
 class Footer extends StatelessWidget {
+  const Footer({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -54,82 +56,98 @@ Widget _buildUi(double width, BuildContext context) {
       ),
       child: LayoutBuilder(
         builder: (context, constraints) {
+          final isMobile = ScreenHelper.isMobile(context);
+          final crossAxisCount = isMobile ? 1 : 2;
+          final tileWidth = constraints.maxWidth / crossAxisCount - 20.0;
+
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 50.0),
-                child: Wrap(
-                  spacing: 20.0,
-                  runSpacing: 20.0,
-                  children: footerItems
-                      .map(
-                        (footerItem) => GestureDetector(
-                          onTap: () => _handleContactTap(footerItem, context),
-                          child: MouseRegion(
-                            cursor: SystemMouseCursors.click,
-                            child: Container(
-                              height: 120.0,
-                              width: ScreenHelper.isMobile(context)
-                                  ? constraints.maxWidth / 2.0 - 20.0
-                                  : constraints.maxWidth / 4.0 - 20.0,
-                              child: Container(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        Image.asset(
-                                          footerItem.iconPath,
-                                          width: 25.0,
-                                        ),
-                                        SizedBox(
-                                          width: 15.0,
-                                        ),
-                                        Text(
-                                          footerItem.title,
-                                          style: GoogleFonts.oswald(
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.w700,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 15.0,
-                                    ),
-                                    RichText(
-                                      textAlign: TextAlign.start,
-                                      text: TextSpan(
-                                        children: [
-                                          TextSpan(
-                                            text: "${footerItem.text1}\n",
-                                            style: TextStyle(
-                                              color: kCaptionColor,
-                                              height: 1.8,
-                                            ),
-                                          ),
-                                          TextSpan(
-                                            text: "${footerItem.text2}\n",
-                                            style: TextStyle(
-                                              color: kCaptionColor,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
-                      .toList(),
+              Text(
+                'CONTACT',
+                style: GoogleFonts.oswald(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w900,
+                  fontSize: 30.0,
+                  height: 1.3,
                 ),
               ),
+              const SizedBox(height: 16.0),
+              const Text(
+                'Let\'s connect. Tap any card to reach out instantly.',
+                style: TextStyle(
+                  color: kCaptionColor,
+                  height: 1.6,
+                  fontSize: 15.0,
+                ),
+              ),
+              const SizedBox(height: 28.0),
+              Wrap(
+                spacing: 20.0,
+                runSpacing: 20.0,
+                children: footerItems.map((footerItem) {
+                  return GestureDetector(
+                    onTap: () => _handleContactTap(footerItem, context),
+                    child: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: Container(
+                        width: tileWidth,
+                        padding: const EdgeInsets.all(16.0),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF0E1A24).withOpacity(0.7),
+                          borderRadius: BorderRadius.circular(16.0),
+                          border: Border.all(color: Colors.white.withOpacity(0.08)),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Image.asset(
+                                  footerItem.iconPath,
+                                  width: 24.0,
+                                ),
+                                const SizedBox(width: 12.0),
+                                Text(
+                                  footerItem.title,
+                                  style: GoogleFonts.oswald(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 12.0),
+                            RichText(
+                              textAlign: TextAlign.start,
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: '${footerItem.text1}\n',
+                                    style: const TextStyle(
+                                      color: kCaptionColor,
+                                      height: 1.8,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: '${footerItem.text2}\n',
+                                    style: const TextStyle(
+                                      color: kCaptionColor,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
+              const SizedBox(height: 40.0),
             ],
           );
         },
@@ -143,21 +161,21 @@ void _handleContactTap(FooterItem footerItem, BuildContext context) async {
   String? url;
   
   switch (footerItem.title) {
-    case "ADDRESS":
+    case 'ADDRESS':
       // Open Google Maps with the address
       url = "https://www.google.com/maps/search/?api=1&query=${Uri.encodeComponent("Mahindra University, Hyderabad")}";
       break;
-    case "PHONE":
+    case 'PHONE':
       // Open phone dialer
-      url = "tel:+917702282663";
+      url = 'tel:+917702282663';
       break;
-    case "EMAIL":
+    case 'EMAIL':
       // Open email client
-      url = "mailto:suryatejch7@gmail.com";
+      url = 'mailto:suryatejch7@gmail.com';
       break;
-    case "WHATSAPP":
+    case 'WHATSAPP':
       // Open WhatsApp
-      url = "https://wa.me/917702282663";
+      url = 'https://wa.me/917702282663';
       break;
   }
   
@@ -170,7 +188,7 @@ void _handleContactTap(FooterItem footerItem, BuildContext context) async {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Could not open ${footerItem.title.toLowerCase()}. Contact: ${footerItem.text1}'),
-            duration: Duration(seconds: 3),
+            duration: const Duration(seconds: 3),
           ),
         );
       }
@@ -179,7 +197,7 @@ void _handleContactTap(FooterItem footerItem, BuildContext context) async {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Error opening ${footerItem.title.toLowerCase()}: $e'),
-          duration: Duration(seconds: 3),
+          duration: const Duration(seconds: 3),
         ),
       );
     }

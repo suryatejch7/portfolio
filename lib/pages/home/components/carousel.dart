@@ -6,11 +6,13 @@ import 'package:web_portfolio/utils/screen_helper.dart';
 import 'package:web_portfolio/utils/download_utils.dart';
 
 class Carousel extends StatelessWidget {
+  const Carousel({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     // Set up the download callback
     onDownloadPressed = () => downloadResume(context);
-    double carouselContainerHeight = MediaQuery.of(context).size.height *
+    final double carouselContainerHeight = MediaQuery.of(context).size.height *
         (ScreenHelper.isMobile(context) ? .7 : .85);
     return Container(
       height: carouselContainerHeight,
@@ -24,7 +26,7 @@ class Carousel extends StatelessWidget {
               options: CarouselOptions(
                 // autoPlay: true,
                 viewportFraction: 1,
-                scrollPhysics: NeverScrollableScrollPhysics(),
+                scrollPhysics: const NeverScrollableScrollPhysics(),
                 height: carouselContainerHeight,
               ),
               items: List.generate(
@@ -69,7 +71,7 @@ class Carousel extends StatelessWidget {
 Widget _buildDesktop(BuildContext context, Widget text, Widget image) {
   return Center(
     child: Container(
-      constraints: BoxConstraints(
+      constraints: const BoxConstraints(
         maxWidth: kDesktopMaxWidth,
         minWidth: kDesktopMaxWidth,
       ),
@@ -91,7 +93,7 @@ Widget _buildDesktop(BuildContext context, Widget text, Widget image) {
 Widget _buildTablet(BuildContext context, Widget text, Widget image) {
   return Center(
     child: Container(
-      constraints: BoxConstraints(
+      constraints: const BoxConstraints(
         maxWidth: kTabletMaxWidth,
         minWidth: kTabletMaxWidth,
       ),

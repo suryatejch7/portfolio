@@ -1,120 +1,114 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:web_portfolio/models/header_item.dart';
-import 'package:web_portfolio/utils/constants.dart';
 import 'package:web_portfolio/utils/globals.dart';
 import 'package:web_portfolio/utils/screen_helper.dart';
 
+// Initialize with dummy callbacks - will be set by Home widget
 List<HeaderItem> headerItems = [
   HeaderItem(
-    title: "HOME",
+    title: 'HOME',
     onTap: () {},
   ),
-  HeaderItem(title: "PROJECTS", onTap: () {}),
-  HeaderItem(title: "SKILLS", onTap: () {}),
+  HeaderItem(title: 'PROJECTS', onTap: () {}),
+  HeaderItem(title: 'EDUCATION', onTap: () {}),
+  HeaderItem(title: 'SKILLS', onTap: () {}),
   HeaderItem(
-    title: "HIRE ME",
+    title: 'HIRE ME',
     onTap: () {},
     isButton: true,
   ),
 ];
 
+// Function to set navigation callbacks
+void setNavigationCallbacks({
+  required VoidCallback onHome,
+  required VoidCallback onProjects,
+  required VoidCallback onEducation,
+  required VoidCallback onSkills,
+  required VoidCallback onHireMe,
+}) {
+  headerItems = [
+    HeaderItem(title: 'HOME', onTap: onHome),
+    HeaderItem(title: 'PROJECTS', onTap: onProjects),
+    HeaderItem(title: 'EDUCATION', onTap: onEducation),
+    HeaderItem(title: 'SKILLS', onTap: onSkills),
+    HeaderItem(title: 'HIRE ME', onTap: onHireMe, isButton: true),
+  ];
+}
+
 class HeaderLogo extends StatelessWidget {
+  const HeaderLogo({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: GestureDetector(
-          onTap: () {},
-          child: RichText(
-            text: TextSpan(
-              children: [
-                TextSpan(
-                  text: "M",
-                  style: GoogleFonts.oswald(
-                    color: Colors.white,
-                    fontSize: 32.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                TextSpan(
-                  text: ".",
-                  style: GoogleFonts.oswald(
-                    color: kPrimaryColor,
-                    fontSize: 36.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                )
-              ],
-            ),
-          ),
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: () {
+          // Toggle sidebar menu
+          Globals.menuOpen.value = !Globals.menuOpen.value;
+        },
+        child: const Icon(
+          Icons.menu_rounded,
+          color: Colors.white,
+          size: 32.0,
         ),
       ),
     );
   }
 }
 
-class HeaderRow extends StatelessWidget {
+class _HeaderTitle extends StatelessWidget {
+  const _HeaderTitle({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Row(
-        children: headerItems
-            .map(
-              (item) => item.isButton
-                  ? MouseRegion(
-                      cursor: SystemMouseCursors.click,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: kDangerColor,
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 20.0, vertical: 5.0),
-                        child: TextButton(
-                          onPressed: item.onTap,
-                          child: Text(
-                            item.title,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 13.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                    )
-                  : MouseRegion(
-                      cursor: SystemMouseCursors.click,
-                      child: Container(
-                        margin: EdgeInsets.only(right: 30.0),
-                        child: GestureDetector(
-                          onTap: item.onTap,
-                          child: Text(
-                            item.title,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 13.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-            )
-            .toList(),
+    return ValueListenableBuilder<String>(
+      valueListenable: Globals.currentSectionTitle,
+      builder: (context, title, _) {
+        return AnimatedSwitcher(
+          duration: const Duration(milliseconds: 250),
+          switchInCurve: Curves.easeInOut,
+          switchOutCurve: Curves.easeInOut,
+          transitionBuilder: (child, anim) {
+            return FadeTransition(
+              opacity: anim,
+              child: SlideTransition(
+                position: Tween<Offset>(
+                  begin: const Offset(0.0, 0.3),
+                  end: Offset.zero,
+                ).animate(anim),
+                child: child,
+              ),
+            );
+          },
+          child: Text(
+            title,
+            key: ValueKey(title),
+            style: GoogleFonts.oswald(
+              color: Colors.white,
+              fontWeight: FontWeight.w700,
+              fontSize: 16.0,
+              letterSpacing: 1.2,
+            ),
+          ),
+        );
+      },
     );
   }
 }
 
 class Header extends StatelessWidget {
+  const Header({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
       child: ScreenHelper(
         desktop: Padding(
-          padding: EdgeInsets.symmetric(vertical: 8.0),
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: buildHeader(),
         ),
         // We will make this in a bit
@@ -126,42 +120,108 @@ class Header extends StatelessWidget {
 
   // mobile header
   Widget buildMobileHeader() {
-    return SafeArea(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.0),
+    final Widget menuChip = _glassWrap(
+      const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+        child: HeaderLogo(),
+      ),
+    );
+
+    final Widget titleChip = _glassWrap(
+      const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+        child: _HeaderTitle(),
+      ),
+    );
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      child: SizedBox(
+        height: 48.0, // Reduced height
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            HeaderLogo(),
-            // Restart server to make icons work
-            // Lets make a scaffold key and create a drawer
-            GestureDetector(
-              onTap: () {
-                // Lets open drawer using global key
-                Globals.scaffoldKey.currentState?.openEndDrawer();
-              },
-              child: FaIcon(
-                FontAwesomeIcons.bars,
-                color: Colors.white,
-                size: 28.0,
+            // Left glassmorphic menu button
+            menuChip,
+            const SizedBox(width: 16.0),
+            // Centered title (use Expanded + Align.center)
+            Expanded(
+              child: Align(
+                alignment: Alignment.center,
+                child: titleChip,
               ),
-            )
+            ),
+            // Right spacer to preserve perfect centering (same size as left chip)
+            const SizedBox(width: 16.0),
+            Opacity(opacity: 0.0, child: menuChip),
           ],
         ),
       ),
     );
   }
 
-  // Lets plan for mobile and smaller width screens
+  // Desktop/tablet header
   Widget buildHeader() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          HeaderLogo(),
-          HeaderRow(),
-        ],
+    final Widget menuChip = _glassWrap(
+      const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+        child: HeaderLogo(),
+      ),
+    );
+
+    final Widget titleChip = _glassWrap(
+      const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+        child: _HeaderTitle(),
+      ),
+    );
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      child: SizedBox(
+        height: 48.0, // Reduced height
+        child: Row(
+          children: [
+            // Left glassmorphic menu button
+            menuChip,
+            const SizedBox(width: 16.0),
+            // Centered title (use Expanded + Align.center)
+            Expanded(
+              child: Align(
+                alignment: Alignment.center,
+                child: titleChip,
+              ),
+            ),
+            // Right spacer to preserve perfect centering (same size as left chip)
+            const SizedBox(width: 16.0),
+            Opacity(opacity: 0.0, child: menuChip),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // Shared glass wrapper for iOS-like liquid glass effect
+  Widget _glassWrap(Widget child) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(12.0),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.06),
+            border: Border.all(color: Colors.white.withOpacity(0.12), width: 1),
+            borderRadius: BorderRadius.circular(12.0),
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Colors.white.withOpacity(0.10),
+                Colors.white.withOpacity(0.02),
+              ],
+            ),
+          ),
+          child: child,
+        ),
       ),
     );
   }

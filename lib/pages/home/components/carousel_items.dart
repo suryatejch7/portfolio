@@ -16,18 +16,18 @@ List<CarouselItemModel> carouselItems = List.generate(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            "JAVA BACKEND & FLUTTER DEVELOPER",
+            'JAVA BACKEND & FLUTTER DEVELOPER',
             style: GoogleFonts.oswald(
               color: kPrimaryColor,
               fontWeight: FontWeight.w900,
               fontSize: 16.0,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 18.0,
           ),
           Text(
-            "SURYA\nTEJ",
+            'SURYA\nTEJ',
             style: GoogleFonts.oswald(
               color: Colors.white,
               fontSize: 40.0,
@@ -35,21 +35,21 @@ List<CarouselItemModel> carouselItems = List.generate(
               height: 1.3,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10.0,
           ),
-          Text(
-            "Java backend developer & Flutter mobile/web developer",
+          const Text(
+            'Java backend developer & Flutter mobile/web developer',
             style: TextStyle(
               color: kCaptionColor,
               fontSize: 15.0,
               height: 1.0,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10.0,
           ),
-          SizedBox(
+          const SizedBox(
             height: 25.0,
           ),
           MouseRegion(
@@ -60,13 +60,13 @@ List<CarouselItemModel> carouselItems = List.generate(
                 borderRadius: BorderRadius.circular(8.0),
               ),
               height: 48.0,
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                 horizontal: 28.0,
               ),
               child: TextButton(
                 onPressed: onDownloadPressed,
-                child: Text(
-                  "DOWNLOAD CV",
+                child: const Text(
+                  'DOWNLOAD CV',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 13.0,
@@ -81,7 +81,7 @@ List<CarouselItemModel> carouselItems = List.generate(
     ),
     image: Container(
       child: Image.asset(
-        "assets/person.png",
+        'assets/person.png',
         fit: BoxFit.contain,
       ),
     ),

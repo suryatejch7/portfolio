@@ -7,25 +7,27 @@ import 'package:web_portfolio/utils/screen_helper.dart';
 final List<Education> educationList = [
   Education(
     description:
-        "Secondary School Education • Percentage: 85% • Foundation in core subjects",
-    linkName: "Narayana School",
-    period: "Apr 2019 - Mar 2020",
+        'Secondary School Education • Percentage: 85% • Foundation in core subjects',
+    linkName: 'Narayana School',
+    period: 'Apr 2019 - Mar 2020',
   ),
   Education(
     description:
-        "Intermediate Education • Percentage: 97% • Focused on Science and Mathematics",
-    linkName: "Narayana College",
-    period: "May 2020 - Apr 2022",
+        'Intermediate Education • Percentage: 97% • Focused on Science and Mathematics',
+    linkName: 'Narayana College',
+    period: 'May 2020 - Apr 2022',
   ),
   Education(
     description:
-        "Bachelor of Computer Science Engineering • CGPA: 6.0/10 (till 6th semester) • Coursework: Software Engineering, Object-Oriented Programming, DBMS",
-    linkName: "Mahindra University",
-    period: "Aug 2022 - Present",
+        'Bachelor of Computer Science Engineering • CGPA: 6.0/10 (till 6th semester) • Coursework: Software Engineering, Object-Oriented Programming, DBMS',
+    linkName: 'Mahindra University',
+    period: 'Aug 2022 - Present',
   ),
 ];
 
 class EducationSection extends StatelessWidget {
+  const EducationSection({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -49,7 +51,7 @@ class EducationSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "EDUCATION",
+              'EDUCATION',
               style: GoogleFonts.oswald(
                 color: Colors.white,
                 fontWeight: FontWeight.w900,
@@ -57,16 +59,16 @@ class EducationSection extends StatelessWidget {
                 height: 1.3,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 5.0,
             ),
-            SizedBox(
+            const SizedBox(
               height: 40.0,
             ),
             ...educationList
                 .map(
                   (education) => Container(
-                    margin: EdgeInsets.only(bottom: 30.0),
+                    margin: const EdgeInsets.only(bottom: 30.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -78,17 +80,17 @@ class EducationSection extends StatelessWidget {
                             fontSize: 20.0,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 5.0,
                         ),
                         Text(
                           education.description,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: kCaptionColor,
                             height: 1.5,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10.0,
                         ),
                         MouseRegion(
@@ -97,7 +99,7 @@ class EducationSection extends StatelessWidget {
                             onTap: () {},
                             child: Text(
                               education.linkName,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.white,
                               ),
                             ),

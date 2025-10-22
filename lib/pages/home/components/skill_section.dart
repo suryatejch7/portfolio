@@ -1,33 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:web_portfolio/models/skill.dart';
 import 'package:web_portfolio/utils/constants.dart';
 import 'package:web_portfolio/utils/screen_helper.dart';
 
-List<Skill> skills = [
-  Skill(
-    skill: "Dart",
-    percentage: 62,
-  ),
-  Skill(
-    skill: "Javascript",
-    percentage: 80,
-  ),
-  Skill(
-    skill: "PHP",
-    percentage: 78,
-  ),
-  Skill(
-    skill: "Python",
-    percentage: 90,
-  ),
-  Skill(
-    skill: "GoLang",
-    percentage: 40,
-  ),
-];
-
 class SkillSection extends StatelessWidget {
+  const SkillSection({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,7 +17,63 @@ class SkillSection extends StatelessWidget {
     );
   }
 
+  Widget _buildChip(String text) {
+    return Container(
+      margin: const EdgeInsets.only(right: 10.0, bottom: 10.0),
+      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.06),
+        borderRadius: BorderRadius.circular(20.0),
+        border: Border.all(color: Colors.white.withOpacity(0.12)),
+      ),
+      child: Text(
+        text,
+        style: GoogleFonts.oswald(
+          color: Colors.white,
+          fontWeight: FontWeight.w600,
+          fontSize: 13.0,
+          letterSpacing: 0.5,
+        ),
+      ),
+    );
+  }
+
+  Widget _card({required String title, required List<String> items}) {
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: const Color(0xFF0E1A24).withOpacity(0.7),
+        borderRadius: BorderRadius.circular(16.0),
+        border: Border.all(color: Colors.white.withOpacity(0.08)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: GoogleFonts.oswald(
+              color: kPrimaryColor,
+              fontWeight: FontWeight.w900,
+              fontSize: 16.0,
+            ),
+          ),
+          const SizedBox(height: 12.0),
+          Wrap(
+            children: items.map(_buildChip).toList(),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildUi(double width) {
+    const languages = [
+      'Java', 'Dart', 'JavaScript', 'HTML (Basic)'
+    ];
+    const frameworks = [
+      'Spring Boot', 'Flutter', 'Node.js', 'OOP', 'MySQL', 'PostgreSQL'
+    ];
+
     return Center(
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
@@ -50,76 +84,41 @@ class SkillSection extends StatelessWidget {
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                  Text(
-                    "SKILLS",
-                    style: GoogleFonts.oswald(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w900,
-                      fontSize: 28.0,
-                      height: 1.3,
+                Text(
+                  'SKILLS',
+                  style: GoogleFonts.oswald(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w900,
+                    fontSize: 30.0,
+                    height: 1.3,
+                  ),
+                ),
+                const SizedBox(height: 24.0),
+                Text(
+                  'A snapshot of my current toolset and strengths.',
+                  style: const TextStyle(
+                    color: kCaptionColor,
+                    height: 1.6,
+                    fontSize: 15.0,
+                  ),
+                ),
+                const SizedBox(height: 24.0),
+                Flex(
+                  direction: constraints.maxWidth > 800 ? Axis.horizontal : Axis.vertical,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: _card(title: 'Languages', items: languages),
                     ),
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Text(
-                    "This is all the skills listed below more will be added in due time. This is all the skills listed below more will be added in due time.",
-                    style: TextStyle(
-                      color: kCaptionColor,
-                      height: 1.5,
-                      fontSize: 16.0,
+                    const SizedBox(width: 20.0, height: 20.0),
+                    Expanded(
+                      child: _card(title: 'Frameworks & Databases', items: frameworks),
                     ),
-                  ),
-                  SizedBox(
-                    height: 15.0,
-                  ),
-                  Column(
-                    children: skills
-                        .map(
-                          (skill) => Container(
-                            margin: EdgeInsets.only(bottom: 15.0),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  flex: skill.percentage,
-                                  child: Container(
-                                    padding: EdgeInsets.only(left: 10.0),
-                                    alignment: Alignment.centerLeft,
-                                    height: 38.0,
-                                    child: Text(skill.skill),
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 10.0,
-                                ),
-                                Expanded(
-                                  // remaining (blank part)
-                                  flex: 100 - skill.percentage,
-                                  child: Divider(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 10.0,
-                                ),
-                                Text(
-                                  "${skill.percentage}%",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16.0,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        )
-                        .toList(),
-                  )
-                ],
-              ),
+                  ],
+                ),
+              ],
+            ),
           );
         },
       ),
