@@ -14,27 +14,23 @@ List<HeaderItem> headerItems = [
   HeaderItem(title: 'PROJECTS', onTap: () {}),
   HeaderItem(title: 'EDUCATION', onTap: () {}),
   HeaderItem(title: 'SKILLS', onTap: () {}),
-  HeaderItem(
-    title: 'HIRE ME',
-    onTap: () {},
-    isButton: true,
-  ),
 ];
 
 // Function to set navigation callbacks
+// Note: `onHireMe` is accepted as an optional named callback for compatibility
+// but the UI no longer shows a "HIRE ME" entry in the sidebar.
 void setNavigationCallbacks({
   required VoidCallback onHome,
   required VoidCallback onProjects,
   required VoidCallback onEducation,
   required VoidCallback onSkills,
-  required VoidCallback onHireMe,
+  VoidCallback? onHireMe,
 }) {
   headerItems = [
     HeaderItem(title: 'HOME', onTap: onHome),
     HeaderItem(title: 'PROJECTS', onTap: onProjects),
     HeaderItem(title: 'EDUCATION', onTap: onEducation),
     HeaderItem(title: 'SKILLS', onTap: onSkills),
-    HeaderItem(title: 'HIRE ME', onTap: onHireMe, isButton: true),
   ];
 }
 
